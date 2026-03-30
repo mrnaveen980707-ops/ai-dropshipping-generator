@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Dropshipping Generator</title>
+<style>
+body {
+font-family: Arial;
+text-align: center;
+padding: 40px;
+background: #111;
+color: white;
+}
+input, button {
+padding: 10px;
+margin: 10px;
+border-radius: 5px;
+border: none;
+}
+button {
+background: #ff6600;
+color: white;
+cursor: pointer;
+}
+#output {
+margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<h1>🚀 AI Dropshipping Generator</h1>
+
+<input type="text" id="product" placeholder="Enter product name">
+<br>
+<button onclick="generate()">Generate</button>
+
+<div id="output"></div>
+
+<script>
+function generate() {
+let product = document.getElementById("product").value;
+
+document.getElementById("output").innerHTML =
+"<h2>Results:</h2>" +
+"<p><b>Product:</b> " + product + "</p>" +
+"<p><b>Ad Copy:</b> This " + product + " is trending worldwide! Limited stock available.</p>" +
+"<p><b>Description:</b> Premium quality " + product + " designed for modern lifestyle.</p>" +
+"<p><b>Store Name:</b> " + product + " Hub</p>";
+}
+</script>
+
+</body>
+</html>
