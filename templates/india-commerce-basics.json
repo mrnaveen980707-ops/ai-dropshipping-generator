@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "india-commerce-basics",
+  "name": "India Commerce Basics",
+  "description": "Starter checklist for evaluating India-focused e-commerce opportunities.",
+  "market": "India",
+  "checks": [
+    {"key":"cod_rto","label":"COD/RTO assumptions documented","weight":20},
+    {"key":"landed_cost","label":"Landed cost validated with supplier evidence","weight":20},
+    {"key":"delivery","label":"Delivery timeline and courier assumptions documented","weight":15},
+    {"key":"competition","label":"At least three competing offers reviewed","weight":15},
+    {"key":"creative","label":"Product has a clear visual demonstration angle","weight":15},
+    {"key":"compliance","label":"Claims, safety and policy risks reviewed","weight":15}
+  ]
+}
