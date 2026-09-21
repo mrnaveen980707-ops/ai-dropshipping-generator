@@ -6,6 +6,11 @@ An open-source browser-based toolkit for structuring early-stage dropshipping re
 ![No API key required](https://img.shields.io/badge/API%20key-not%20required-brightgreen)
 ![Client-side](https://img.shields.io/badge/data-client--side-blue)
 
+## Why this exists
+Dropshipping research is usually spread across notes, spreadsheets, supplier conversations, ad libraries, storefront reviews and calculators. This project turns those recurring tasks into a transparent, inspectable toolkit that can be run locally in a browser.
+
+The project deliberately avoids pretending that generated text is live market evidence. Wherever real data matters—supplier cost, delivery rate, RTO, competitor quality, product-page readiness—the user provides the inputs and the toolkit makes the assumptions visible.
+
 ## Current modules
 - Product research brief: audience, positioning, creative angles, risks and validation
 - Supplier economics: landed cost, gross margin and readiness checklist
@@ -37,6 +42,14 @@ node tests/research.test.js
 - no required paid services
 - hypotheses clearly separated from verified facts
 - reusable functions that can be tested independently from the UI
+
+## Maintainer note
+This project is in active early-stage development. The near-term goal is to make common e-commerce research workflows easier to inspect, test and extend—especially for India-specific realities such as COD/RTO economics that are often missing from generic tools.
+
+Contributions are welcome in research logic, accessibility, documentation, export formats, testing, and additional market templates. New contributors can start with the open issues labelled `enhancement`.
+
+## Project maturity
+The repository currently has working modules, unit tests, CI configuration, contribution guidance, issue templates, a roadmap, and a history of feature pull requests. It is still early-stage and does not claim established ecosystem adoption, dependency counts, download volume, or a large contributor base.
 
 ## Contributing
 Issues, bug reports, documentation improvements and feature contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [ROADMAP.md](ROADMAP.md).
