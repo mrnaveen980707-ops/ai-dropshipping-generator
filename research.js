@@ -147,5 +147,31 @@
     const q=v=>'"'+String(v).replace(/"/g,'""')+'"'; return rows.map(r=>r.map(q).join(',')).join('\n');
   }
 
-  return {buildBrief,evaluateSupplier,calculateCod,compareCompetitors,creativePlan,auditProductPage,scoreOpportunity,validateMarketTemplate,briefToMarkdown,briefToCsv};
+  function createWorkspace(data){
+    return {
+      schemaVersion:1,
+      savedAt:new Date().toISOString(),
+      product:data&&data.product?data.product:{},
+      opportunity:data&&data.opportunity?data.opportunity:{},
+      supplier:data&&data.supplier?data.supplier:{},
+      cod:data&&data.cod?data.cod:{},
+      competitors:Array.isArray(data&&data.competitors)?data.competitors:[],
+      creative:data&&data.creative?data.creative:{},
+      cro:data&&data.cro?data.cro:{}
+    };
+  }
+
+  function exportWorkspace(workspace){
+    const w=createWorkspace(workspace||{});
+    return JSON.stringify(w,null,2);
+  }
+
+  function importWorkspace(text){
+    let parsed;
+    try{parsed=typeof text==='string'?JSON.parse(text):text;}catch(e){throw new Error('Workspace JSON is invalid.');}
+    if(!parsed || parsed.schemaVersion!==1) throw new Error('Unsupported workspace schema version.');
+    return createWorkspace(parsed);
+  }
+
+  return {buildBrief,evaluateSupplier,calculateCod,compareCompetitors,creativePlan,auditProductPage,scoreOpportunity,validateMarketTemplate,briefToMarkdown,briefToCsv,createWorkspace,exportWorkspace,importWorkspace};
 });

@@ -14,11 +14,17 @@
 - [x] Creative testing planner
 - [x] Product-page CRO checklist
 
-## Longer term
-- [ ] Optional adapters for external research sources
+## Product experience
 - [x] Community-contributed market templates
 - [x] Versioned research schemas
-- [ ] Privacy-preserving local persistence
-- [ ] Dedicated module pages and richer browser UI
+- [x] Privacy-preserving local persistence
+- [x] Richer modular browser UI
+- [x] JSON workspace export / import
+
+## Longer term
+- [ ] Optional adapters for external research sources
+- [ ] Dedicated module pages
+- [ ] More community market templates
+- [ ] Broader automated browser testing
 
 Roadmap items are intentions, not commitments.
