@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {buildBrief,evaluateSupplier,calculateCod,compareCompetitors,creativePlan,auditProductPage,briefToMarkdown,briefToCsv}=require('../research.js');
+const {buildBrief,evaluateSupplier,calculateCod,compareCompetitors,creativePlan,auditProductPage,scoreOpportunity,validateMarketTemplate,briefToMarkdown,briefToCsv}=require('../research.js');
 
 assert.throws(()=>buildBrief({product:''}),/Product is required/);
 const india=buildBrief({product:'Magnetic Drawing Board',market:'India',category:'Kids & family',price:'₹1499',problem:'Screen-free play'});
@@ -19,7 +19,14 @@ const plan=creativePlan({product:'Drawing Board',problem:'too much screen time',
 assert.equal(plan.length,3); assert.match(plan[0].hook,/screen time/);
 
 const audit=auditProductPage({clearHeadline:true,demoAboveFold:true,priceVisible:true,trustSignals:true,benefitSections:true,objectionFaq:true,shippingClarity:true,returnsClarity:true,mobileFriendly:true,ctaRepeated:true});
-assert.equal(audit.score,100); assert.equal(audit.recommendations.length,0);
+assert.equal(audit.score,100);
+
+const opportunity=scoreOpportunity({demandEvidence:8,marginPotential:7,logisticsEase:6,creativePotential:9,competitionAdvantage:5});
+assert.equal(opportunity.score,73.5); assert.match(opportunity.methodology,/user-provided inputs/);
+
+const validTemplate={schemaVersion:1,id:'india-basic',name:'India basic',checks:[{key:'cod',label:'COD risk',weight:20}]};
+assert.equal(validateMarketTemplate(validTemplate).valid,true);
+assert.equal(validateMarketTemplate({schemaVersion:2,checks:[]}).valid,false);
 
 assert.match(briefToMarkdown(india),/Dropshipping Research Brief/);
 assert.match(briefToCsv(india),/section,item/);

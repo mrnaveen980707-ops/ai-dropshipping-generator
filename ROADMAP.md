@@ -3,8 +3,8 @@
 ## Near term
 - [x] Modularize the generator logic
 - [x] Add downloadable Markdown / CSV export
-- [ ] Add scoring fields for demand, margin, logistics and creative potential
-- [ ] Improve accessibility and keyboard navigation
+- [x] Add scoring fields for demand, margin, logistics and creative potential
+- [x] Improve accessibility and keyboard navigation
 - [x] Add simple automated tests
 
 ## Research modules
@@ -16,8 +16,8 @@
 
 ## Longer term
 - [ ] Optional adapters for external research sources
-- [ ] Community-contributed market templates
-- [ ] Versioned research schemas
+- [x] Community-contributed market templates
+- [x] Versioned research schemas
 - [ ] Privacy-preserving local persistence
 - [ ] Dedicated module pages and richer browser UI
 
