@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {buildBrief,evaluateSupplier,calculateCod,compareCompetitors,creativePlan,auditProductPage,scoreOpportunity,validateMarketTemplate,briefToMarkdown,briefToCsv}=require('../research.js');
+const {buildBrief,evaluateSupplier,calculateCod,compareCompetitors,creativePlan,auditProductPage,scoreOpportunity,validateMarketTemplate,briefToMarkdown,briefToCsv,createWorkspace,exportWorkspace,importWorkspace}=require('../research.js');
 
 assert.throws(()=>buildBrief({product:''}),/Product is required/);
 const india=buildBrief({product:'Magnetic Drawing Board',market:'India',category:'Kids & family',price:'₹1499',problem:'Screen-free play'});
@@ -30,4 +30,10 @@ assert.equal(validateMarketTemplate({schemaVersion:2,checks:[]}).valid,false);
 
 assert.match(briefToMarkdown(india),/Dropshipping Research Brief/);
 assert.match(briefToCsv(india),/section,item/);
+
+const ws=createWorkspace({product:{product:'Drawing Board'},competitors:[{name:'A'}]});
+assert.equal(ws.schemaVersion,1);
+assert.equal(importWorkspace(exportWorkspace(ws)).product.product,'Drawing Board');
+assert.throws(()=>importWorkspace('not-json'),/invalid/);
+assert.throws(()=>importWorkspace(JSON.stringify({schemaVersion:99})),/Unsupported/);
 console.log('All research toolkit tests passed.');
