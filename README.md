@@ -6,24 +6,24 @@ An open-source browser-based toolkit for structuring early-stage dropshipping re
 ![No API key required](https://img.shields.io/badge/API%20key-not%20required-brightgreen)
 ![Client-side](https://img.shields.io/badge/data-client--side-blue)
 
-## What it does
-The toolkit now includes:
-- product research briefs for India and global markets
-- audience, positioning, creative-angle and product-page prompts
-- supplier landed-cost and margin calculator
-- supplier-readiness checklist
+## Current modules
+- Product research brief: audience, positioning, creative angles, risks and validation
+- Supplier economics: landed cost, gross margin and readiness checklist
 - India COD/RTO contribution planner
+- Competitor comparison framework
+- 3-angle creative testing planner
+- Product-page CRO checklist and score
 - Markdown and CSV export
-- deterministic research engine with unit tests
+- Deterministic research engine with Node-based unit tests
 
-> This is a research and planning aid. It does **not** verify live demand, supplier quality, ad costs, profitability, taxes, compliance, or legal status.
+> This project is a research and planning aid. It does **not** verify live demand, supplier quality, ad costs, profitability, taxes, compliance, reviews, competitor claims, or legal status.
 
 ## Quick start
-1. Download or clone the repository.
+1. Clone or download the repository.
 2. Open `index.html` in a browser.
-3. Use the product research, supplier economics, or COD/RTO modules.
+3. Use the modules with your own real inputs.
 
-No build step, backend or API key is required.
+No backend or API key is required.
 
 ## Run tests
 ```bash
@@ -32,36 +32,14 @@ node tests/research.test.js
 
 ## Design principles
 - transparent assumptions
-- user-provided economics rather than fabricated market data
-- no required paid services
+- user-provided data rather than fabricated market evidence
 - client-side by default
-- hypotheses clearly separated from verified evidence
-
-## Project structure
-```
-.
-├── index.html
-├── research.js
-├── tests/
-│   └── research.test.js
-├── docs/
-│   └── ARCHITECTURE.md
-├── README.md
-├── CONTRIBUTING.md
-├── CODE_OF_CONDUCT.md
-├── ROADMAP.md
-├── SECURITY.md
-├── LICENSE
-└── .github/
-    ├── workflows/
-    └── ISSUE_TEMPLATE/
-```
-
-## Roadmap
-See [ROADMAP.md](ROADMAP.md).
+- no required paid services
+- hypotheses clearly separated from verified facts
+- reusable functions that can be tested independently from the UI
 
 ## Contributing
-Issues, bug reports, documentation improvements and feature contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+Issues, bug reports, documentation improvements and feature contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [ROADMAP.md](ROADMAP.md).
 
 ## Responsible use
 Validate demand, actual costs, shipping, product safety, platform policies, IP/trademark rights, taxes and consumer-law requirements independently.
