@@ -32,40 +32,23 @@ button{border:0;border-radius:12px;padding:13px 16px;font-weight:700;cursor:poin
   <div class="grid">
     <div class="card">
       <div class="row">
-        <div>
-          <label for="product">Product</label>
-          <input id="product" placeholder="e.g. magnetic drawing board">
-        </div>
-        <div>
-          <label for="market">Target market</label>
-          <select id="market"><option>India</option><option>Global</option></select>
-        </div>
+        <div><label for="product">Product</label><input id="product" placeholder="e.g. magnetic drawing board"></div>
+        <div><label for="market">Target market</label><select id="market"><option>India</option><option>Global</option></select></div>
       </div>
       <div class="row">
-        <div>
-          <label for="category">Category</label>
-          <select id="category">
-            <option>Kids & family</option><option>Home organization</option><option>Kitchen</option><option>Cleaning</option><option>Travel</option><option>Beauty</option><option>Other</option>
-          </select>
-        </div>
-        <div>
-          <label for="price">Planned selling price</label>
-          <input id="price" placeholder="e.g. ₹1,499 / $29">
-        </div>
+        <div><label for="category">Category</label><select id="category"><option>Kids & family</option><option>Home organization</option><option>Kitchen</option><option>Cleaning</option><option>Travel</option><option>Beauty</option><option>Other</option></select></div>
+        <div><label for="price">Planned selling price</label><input id="price" placeholder="e.g. ₹1,499 / $29"></div>
       </div>
       <label for="problem">Main customer problem / desired outcome</label>
       <textarea id="problem" placeholder="e.g. Parents want a screen-free activity that keeps children engaged while travelling."></textarea>
       <button class="primary" onclick="generateBrief()">Generate research brief</button>
-      <p class="note">The output is generated from transparent rule-based templates in this page. It does not call an AI model or external data source.</p>
+      <p class="note">The output uses transparent rule-based templates. It does not call an AI model or external data source.</p>
     </div>
 
     <div class="card result" id="result">
       <div class="kicker">Research brief</div>
       <div id="content"></div>
-      <div class="actions">
-        <button class="secondary" onclick="copyBrief()">Copy brief</button>
-        <button class="secondary" onclick="resetForm()">Reset</button>
-      </div>
+      <div class="actions"><button class="secondary" onclick="copyBrief()">Copy brief</button><button class="secondary" onclick="resetForm()">Reset</button></div>
     </div>
   </div>
 
@@ -79,71 +62,39 @@ button{border:0;border-radius:12px;padding:13px 16px;font-weight:700;cursor:poin
       <li>Test creatives and landing-page conversion with small controlled budgets.</li>
     </ul></div>
   </div>
-
   <div class="footer">MIT licensed. Built as an open-source research framework. Contributions welcome.</div>
 </div>
 
+<script src="research.js"></script>
 <script>
-function esc(s){return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
 function list(items){return '<ul>'+items.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'}
 function generateBrief(){
-  const product=document.getElementById('product').value.trim();
-  if(!product){alert('Enter a product first.');return}
-  const market=document.getElementById('market').value;
-  const category=document.getElementById('category').value;
-  const price=document.getElementById('price').value.trim()||'Not set';
-  const problem=document.getElementById('problem').value.trim()||'Define the strongest customer problem before testing.';
-  const india=market==='India';
-  const audience=india
-    ? ['Urban and tier-2 online shoppers who understand the use case quickly','Value-conscious buyers comparing against Amazon/Flipkart alternatives','COD users who need strong trust signals and clear delivery expectations']
-    : ['Problem-aware shoppers reachable through short-form creative','Buyers comparing convenience, novelty and social proof','Mobile-first consumers who need a fast demonstration of value'];
-  const angles=[
-    'Problem → demo → outcome: show the pain point in the first 2 seconds.',
-    'Before vs after: make the improvement visually obvious.',
-    'Use-case proof: show the product in a realistic daily situation.',
-    'Objection handling: address price, durability, size, shipping or ease-of-use.'
-  ];
-  const risks=india
-    ? ['COD/RTO exposure','Long or inconsistent delivery times','Marketplace price comparison','Low-trust product claims','Weak post-purchase communication']
-    : ['Crowded ad auctions','Fast copycat competition','Shipping variability','Policy-sensitive claims','Low differentiation'];
-  const test=[
-    'Validate at least 3 competing offers and record price, reviews and positioning.',
-    'Get supplier quotes from at least 2 sources and calculate landed cost.',
-    'Create 3 distinct creatives with different hooks—not just 3 edits of one ad.',
-    'Build one focused product page with proof, FAQs, shipping and returns.',
-    'Define stop/continue rules before spending on ads.'
-  ];
-  const html=
-  '<div class="section"><h3>Product snapshot</h3><p><b>'+esc(product)+'</b> • '+esc(category)+' • '+esc(market)+' • Planned price: '+esc(price)+'</p><p><b>Problem / desired outcome:</b> '+esc(problem)+'</p></div>'+
-  '<div class="section"><h3>Likely audience hypotheses</h3>'+list(audience)+'</div>'+
-  '<div class="section"><h3>Positioning ideas to test</h3>'+list([
-    'Lead with the specific outcome rather than calling the product “trending”.',
-    'Quantify convenience only when you can substantiate it.',
-    'Bundle or bonus: pair the core product with a low-cost accessory, guide or warranty.',
-    india?'Use trust, COD clarity and delivery transparency as part of the offer.':'Use delivery speed, proof and differentiation as part of the offer.'
-  ])+'</div>'+
-  '<div class="section"><h3>Creative angles</h3>'+list(angles)+'</div>'+
-  '<div class="section"><h3>Product-page prompts</h3>'+list([
-    'What problem does this solve better than a familiar alternative?',
-    'What can be demonstrated visually in under 10 seconds?',
-    'What are the top 5 objections a skeptical buyer will have?',
-    'What proof can you show without exaggeration?',
-    'What makes the offer worth acting on now without fake scarcity?'
-  ])+'</div>'+
-  '<div class="section"><h3>Risk checklist</h3>'+list(risks)+'</div>'+
-  '<div class="section"><h3>Minimum validation plan</h3>'+list(test)+'</div>';
-  document.getElementById('content').innerHTML=html;
+  const input={
+    product:document.getElementById('product').value,
+    market:document.getElementById('market').value,
+    category:document.getElementById('category').value,
+    price:document.getElementById('price').value,
+    problem:document.getElementById('problem').value
+  };
+  let b;
+  try{b=DropshippingResearch.buildBrief(input)}catch(e){alert(e.message);return}
+  const s=b.snapshot;
+  document.getElementById('content').innerHTML=
+    '<div class="section"><h3>Product snapshot</h3><p><b>'+esc(s.product)+'</b> • '+esc(s.category)+' • '+esc(s.market)+' • Planned price: '+esc(s.price)+'</p><p><b>Problem / desired outcome:</b> '+esc(s.problem)+'</p></div>'+
+    '<div class="section"><h3>Likely audience hypotheses</h3>'+list(b.audience)+'</div>'+
+    '<div class="section"><h3>Positioning ideas to test</h3>'+list(b.positioning)+'</div>'+
+    '<div class="section"><h3>Creative angles</h3>'+list(b.angles)+'</div>'+
+    '<div class="section"><h3>Product-page prompts</h3>'+list(b.productPage)+'</div>'+
+    '<div class="section"><h3>Risk checklist</h3>'+list(b.risks)+'</div>'+
+    '<div class="section"><h3>Minimum validation plan</h3>'+list(b.validation)+'</div>';
   document.getElementById('result').style.display='block';
 }
 async function copyBrief(){
   const text=document.getElementById('result').innerText.replace('Copy brief\nReset','').trim();
-  await navigator.clipboard.writeText(text);
-  alert('Research brief copied.');
+  try{await navigator.clipboard.writeText(text);alert('Research brief copied.')}catch(e){alert('Copy failed. Select the text manually.')}
 }
-function resetForm(){
-  ['product','price','problem'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('result').style.display='none';
-}
+function resetForm(){['product','price','problem'].forEach(id=>document.getElementById(id).value='');document.getElementById('result').style.display='none'}
 </script>
 </body>
 </html>
