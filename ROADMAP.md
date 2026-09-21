@@ -1,16 +1,16 @@
 # Roadmap
 
 ## Near term
-- [ ] Modularize the generator logic
-- [ ] Add downloadable Markdown / CSV export
+- [x] Modularize the generator logic
+- [x] Add downloadable Markdown / CSV export
 - [ ] Add scoring fields for demand, margin, logistics and creative potential
 - [ ] Improve accessibility and keyboard navigation
-- [ ] Add simple automated tests
+- [x] Add simple automated tests
 
 ## Research modules
-- [ ] Supplier-evaluation checklist
+- [x] Supplier-evaluation checklist
 - [ ] Competitor-comparison worksheet
-- [ ] India COD/RTO planning worksheet
+- [x] India COD/RTO planning worksheet
 - [ ] Creative testing planner
 - [ ] Product-page CRO checklist
 
