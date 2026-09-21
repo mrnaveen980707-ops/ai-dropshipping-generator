@@ -87,6 +87,54 @@
     return {score,recommendations};
   }
 
+
+  function scoreOpportunity(input){
+    const demand=clamp(input.demandEvidence,0,10);
+    const margin=clamp(input.marginPotential,0,10);
+    const logistics=clamp(input.logisticsEase,0,10);
+    const creative=clamp(input.creativePotential,0,10);
+    const competition=clamp(input.competitionAdvantage,0,10);
+    const weights={demand:0.3,margin:0.25,logistics:0.15,creative:0.2,competition:0.1};
+    const weighted=money(
+      demand*weights.demand+
+      margin*weights.margin+
+      logistics*weights.logistics+
+      creative*weights.creative+
+      competition*weights.competition
+    );
+    const score=money(weighted*10);
+    const notes=[];
+    if(demand<6) notes.push('Demand evidence is weak or incomplete.');
+    if(margin<6) notes.push('Margin potential needs improvement or better sourcing.');
+    if(logistics<6) notes.push('Logistics complexity may create delivery or RTO risk.');
+    if(creative<6) notes.push('The product may be difficult to demonstrate in ads.');
+    if(competition<6) notes.push('Differentiation versus alternatives is not yet strong.');
+    return {
+      score,
+      components:{demandEvidence:demand,marginPotential:margin,logisticsEase:logistics,creativePotential:creative,competitionAdvantage:competition},
+      weights,
+      notes,
+      methodology:'Weighted score from explicit user-provided inputs. This is not live market validation.'
+    };
+  }
+
+  function validateMarketTemplate(template){
+    if(!template || typeof template!=='object') return {valid:false,errors:['Template must be an object.']};
+    const errors=[];
+    if(template.schemaVersion!==1) errors.push('schemaVersion must be 1.');
+    if(!String(template.id||'').trim()) errors.push('id is required.');
+    if(!String(template.name||'').trim()) errors.push('name is required.');
+    if(!Array.isArray(template.checks) || template.checks.length===0) errors.push('checks must be a non-empty array.');
+    if(Array.isArray(template.checks)){
+      template.checks.forEach((c,i)=>{
+        if(!String(c.key||'').trim()) errors.push('checks['+i+'].key is required.');
+        if(!String(c.label||'').trim()) errors.push('checks['+i+'].label is required.');
+        if(c.weight!=null && (num(c.weight)<0 || num(c.weight)>100)) errors.push('checks['+i+'].weight must be between 0 and 100.');
+      });
+    }
+    return {valid:errors.length===0,errors};
+  }
+
   function briefToMarkdown(brief){
     const s=brief.snapshot, section=(title,items)=>'## '+title+'\n'+items.map(x=>'- '+x).join('\n')+'\n';
     return '# Dropshipping Research Brief\n\n**Product:** '+s.product+'\n\n**Market:** '+s.market+'\n\n**Category:** '+s.category+'\n\n**Planned price:** '+s.price+'\n\n**Problem / desired outcome:** '+s.problem+'\n\n'+section('Audience hypotheses',brief.audience)+'\n'+section('Positioning ideas',brief.positioning)+'\n'+section('Creative angles',brief.angles)+'\n'+section('Product-page prompts',brief.productPage)+'\n'+section('Risk checklist',brief.risks)+'\n'+section('Minimum validation plan',brief.validation);
@@ -99,5 +147,5 @@
     const q=v=>'"'+String(v).replace(/"/g,'""')+'"'; return rows.map(r=>r.map(q).join(',')).join('\n');
   }
 
-  return {buildBrief,evaluateSupplier,calculateCod,compareCompetitors,creativePlan,auditProductPage,briefToMarkdown,briefToCsv};
+  return {buildBrief,evaluateSupplier,calculateCod,compareCompetitors,creativePlan,auditProductPage,scoreOpportunity,validateMarketTemplate,briefToMarkdown,briefToCsv};
 });
