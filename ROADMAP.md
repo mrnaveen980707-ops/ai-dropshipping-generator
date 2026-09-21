@@ -9,15 +9,16 @@
 
 ## Research modules
 - [x] Supplier-evaluation checklist
-- [ ] Competitor-comparison worksheet
+- [x] Competitor-comparison worksheet
 - [x] India COD/RTO planning worksheet
-- [ ] Creative testing planner
-- [ ] Product-page CRO checklist
+- [x] Creative testing planner
+- [x] Product-page CRO checklist
 
 ## Longer term
 - [ ] Optional adapters for external research sources
 - [ ] Community-contributed market templates
 - [ ] Versioned research schemas
 - [ ] Privacy-preserving local persistence
+- [ ] Dedicated module pages and richer browser UI
 
 Roadmap items are intentions, not commitments.
