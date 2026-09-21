@@ -12,6 +12,7 @@ Dropshipping research is usually spread across notes, spreadsheets, supplier con
 The project deliberately avoids pretending that generated text is live market evidence. Wherever real data matters—supplier cost, delivery rate, RTO, competitor quality, product-page readiness—the user provides the inputs and the toolkit makes the assumptions visible.
 
 ## Current modules
+- Local workspace: browser-only save/load plus versioned JSON import/export
 - Product research brief: audience, positioning, creative angles, risks and validation
 - Supplier economics: landed cost, gross margin and readiness checklist
 - India COD/RTO contribution planner
@@ -29,6 +30,9 @@ The project deliberately avoids pretending that generated text is live market ev
 3. Use the modules with your own real inputs.
 
 No backend or API key is required.
+
+## Local-first workspace
+The browser UI can save your current inputs to localStorage on your own device. You can also export a versioned JSON workspace and import it later. These controls are designed to keep the workflow usable without a hosted account or database.
 
 ## Run tests
 ```bash
@@ -59,3 +63,7 @@ Validate demand, actual costs, shipping, product safety, platform policies, IP/t
 
 ## License
 MIT — see [LICENSE](LICENSE).
+
+
+## Changelog
+See [CHANGELOG.md](CHANGELOG.md) for recent project updates.
