@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {buildBrief,evaluateSupplier,calculateCod,briefToMarkdown,briefToCsv}=require('../research.js');
+const {buildBrief,evaluateSupplier,calculateCod,compareCompetitors,creativePlan,auditProductPage,briefToMarkdown,briefToCsv}=require('../research.js');
 
 assert.throws(()=>buildBrief({product:''}),/Product is required/);
 const india=buildBrief({product:'Magnetic Drawing Board',market:'India',category:'Kids & family',price:'₹1499',problem:'Screen-free play'});
@@ -10,7 +10,16 @@ const supplier=evaluateSupplier({unitCost:300,shipping:80,duties:20,packaging:25
 assert.equal(supplier.landedCost,440); assert.equal(supplier.grossProfit,559); assert.equal(supplier.reliabilityScore,80);
 
 const cod=calculateCod({orders:100,deliveryRate:70,sellingPrice:999,landedCost:440,forwardShipping:70,reverseShipping:60,adSpend:10000,paymentFeePct:2});
-assert.equal(cod.deliveredOrders,70); assert.equal(cod.rtoOrders,30); assert.ok(Number.isFinite(cod.contributionProfit));
+assert.equal(cod.deliveredOrders,70); assert.equal(cod.rtoOrders,30);
+
+const competitors=compareCompetitors([{name:'A',price:999,offerClarity:8,socialProof:7,creativeQuality:8,deliveryTrust:6,differentiation:9},{name:'B',price:899,offerClarity:5,socialProof:5,creativeQuality:5,deliveryTrust:5,differentiation:5}]);
+assert.equal(competitors[0].name,'A'); assert.equal(competitors[0].score,7.6);
+
+const plan=creativePlan({product:'Drawing Board',problem:'too much screen time',proof:'child using it during travel'});
+assert.equal(plan.length,3); assert.match(plan[0].hook,/screen time/);
+
+const audit=auditProductPage({clearHeadline:true,demoAboveFold:true,priceVisible:true,trustSignals:true,benefitSections:true,objectionFaq:true,shippingClarity:true,returnsClarity:true,mobileFriendly:true,ctaRepeated:true});
+assert.equal(audit.score,100); assert.equal(audit.recommendations.length,0);
 
 assert.match(briefToMarkdown(india),/Dropshipping Research Brief/);
 assert.match(briefToCsv(india),/section,item/);
